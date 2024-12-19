@@ -2,7 +2,7 @@
 
 namespace AuthService.Infrastructure.Entities;
 
-public class User : IdentityUser
+public class User : IdentityUser<Guid>
 {
     public virtual ICollection<IdentityUserClaim<Guid>>? Claims { get; set; }
     public virtual ICollection<IdentityUserLogin<Guid>>? Logins { get; set; }
