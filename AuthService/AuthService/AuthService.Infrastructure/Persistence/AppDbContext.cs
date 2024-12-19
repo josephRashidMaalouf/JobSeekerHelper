@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence;
 
-public class AppDbContext(DbContextOptions options) : IdentityDbContext<User, Role, Guid,
+public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<User, Role, Guid,
     IdentityUserClaim<Guid>, UserRole, IdentityUserLogin<Guid>,
     IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>(options)
 {
