@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Api", "AuthService.Api\AuthService.Api.csproj", "{553A55EE-9417-4C6B-AF42-D2DAD7894981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Domain", "AuthService.Domain\AuthService.Domain.csproj", "{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
