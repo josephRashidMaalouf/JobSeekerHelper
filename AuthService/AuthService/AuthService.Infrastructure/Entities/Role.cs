@@ -13,6 +13,6 @@ public class Role : IdentityRole<Guid>
     {
         
     }
-    
-    public virtual required ICollection<UserRole> UserRoles { get; init; } 
+
+    public virtual ICollection<UserRole> UserRoles { get; init; } = new List<UserRole>();
 }
