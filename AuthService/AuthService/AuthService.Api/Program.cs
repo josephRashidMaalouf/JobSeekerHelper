@@ -3,6 +3,10 @@ using AuthService.Api.ExtensionMethods.Endpoints;
 using AuthService.Infrastructure.Entities;
 using AuthService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +15,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddOpenApi();
 
-var connectionString = builder.Configuration.GetConnectionString("TestConnection") ?? "";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
 
 builder.Services.AddEndpointsApiExplorer().AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -23,6 +27,28 @@ builder.Services.AddAuthentication();
 builder.Services.AddIdentityApiEndpoints<User>()
     .AddRoles<Role>()
     .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("AuthService"))
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation();
+
+        metrics.AddOtlpExporter();
+    })
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddEntityFrameworkCoreInstrumentation();
+
+        tracing.AddOtlpExporter();
+    });
+
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 var app = builder.Build();
 

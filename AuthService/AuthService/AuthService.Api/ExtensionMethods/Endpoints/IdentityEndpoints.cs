@@ -19,10 +19,11 @@ public static class IdentityEndpoints
         
     }
 
-    private static async Task<IResult> LogoutAsync(SignInManager<User> signInManager, [FromBody] object? empty)
+    private static async Task<IResult> LogoutAsync(SignInManager<User> signInManager, [FromBody] object? empty, ILogger<Program> logger)
     {
         if (empty is null)
         {
+            logger.LogWarning("No empty object provided in body", empty);
             return Results.Unauthorized();
         }
         await signInManager.SignOutAsync();
@@ -31,17 +32,19 @@ public static class IdentityEndpoints
     }
 
     private static async Task<IResult> GetRolesAsync(IHttpContextAccessor httpContextAccessor,
-        UserManager<User> userManager)
+        UserManager<User> userManager, ILogger<Program> logger)
     {
         var contextUser = httpContextAccessor.HttpContext?.User;
 
         if (contextUser is null)
         {
+            logger.LogWarning("No context user provided", contextUser);
             return Results.Unauthorized();
         }
 
         if (contextUser.Identity is null || !contextUser.Identity.IsAuthenticated)
         {
+            logger.LogWarning("Context user is unauthorized", contextUser);
             return Results.Unauthorized();
         }
 
@@ -53,6 +56,7 @@ public static class IdentityEndpoints
 
         if (user is null)
         {
+            logger.LogWarning("Username not found in database", user);
             return Results.Unauthorized();
         }
 
@@ -62,13 +66,14 @@ public static class IdentityEndpoints
     }
 
     private static async Task<IResult> RegisterAsUserAsync(RegisterDto registerDto, UserManager<User> userManager,
-        RoleManager<Role> roleManager)
+        RoleManager<Role> roleManager, ILogger<Program> logger)
     {
         var user = new User { UserName = registerDto.UserName, Email = registerDto.UserName };
         var result = await userManager.CreateAsync(user, registerDto.Password);
-
         if (!result.Succeeded)
         {
+            logger.LogWarning("Failed to create user: {username}", registerDto.UserName);
+            result.Errors.ToList().ForEach(error => logger.LogError(error.Code, error.Description));
             return Results.BadRequest(result.Errors);
         }
 
@@ -79,11 +84,12 @@ public static class IdentityEndpoints
         }
 
         await userManager.AddToRoleAsync(user, "user");
-
+        
+        logger.LogInformation("User created a new account with username: {username}", registerDto.UserName);
         return Results.Ok("User registered successfully with 'user' role.");
     }
     
-    private static async Task<IResult> DeleteAsync(IHttpContextAccessor httpContextAccessor, UserManager<User> userManager)
+    private static async Task<IResult> DeleteAsync(IHttpContextAccessor httpContextAccessor, UserManager<User> userManager, ILogger<Program> logger)
     {
 
         var httpContextUser = httpContextAccessor.HttpContext?.User;
@@ -109,6 +115,8 @@ public static class IdentityEndpoints
             return Results.Unauthorized();
         }
         await userManager.DeleteAsync(user);
+        
+        logger.LogInformation("User deleted an account with email: {email}", email);
         return Results.Ok();
 
     }
