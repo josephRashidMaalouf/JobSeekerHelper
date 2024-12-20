@@ -29,8 +29,8 @@ jobs:
     # Build the Docker image and tag it with "latest"
     - name: Build and tag the Docker image as latest
       run: |
-        docker build ./AuthService --file ./AuthService/Dockerfile --tag josephrashidmaalouf/auth-service:latest
-        docker build ./AuthService --file ./AuthService/Dockerfile --tag josephrashidmaalouf/auth.service:${{ github.run_id }}
+        docker build ./AuthService --file ./AuthService/AuthService/Dockerfile --tag josephrashidmaalouf/auth-service:latest
+        docker build ./AuthService --file ./AuthService/AuthService/Dockerfile --tag josephrashidmaalouf/auth.service:${{ github.run_id }}
 
 
     # Push the latest Docker image
