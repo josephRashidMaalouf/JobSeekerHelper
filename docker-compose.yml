@@ -10,7 +10,7 @@ services:
     volumes:
       - sqlserver_data:/var/opt/mssql
 
-  gateway.dashboard:
+  job-seeker-bot.dashboard:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
     container_name: dashboard
     ports:
@@ -25,6 +25,7 @@ services:
       - sqlserver
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AuthDb;User Id=sa;Password=SuperSafePass.123;TrustServerCertificate=True;"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker-bot.dashboard:18889"
     pull_policy: always
 
 
