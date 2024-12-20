@@ -20,8 +20,4 @@
       </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
-    </ItemGroup>
-
 </Project>

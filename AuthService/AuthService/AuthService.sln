@@ -2,11 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Api", "AuthService.Api\AuthService.Api.csproj", "{553A55EE-9417-4C6B-AF42-D2DAD7894981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Domain", "AuthService.Domain\AuthService.Domain.csproj", "{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Infrastructure", "AuthService.Infrastructure\AuthService.Infrastructure.csproj", "{696F1051-340A-4566-B759-551613015AEF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Application", "AuthService.Application\AuthService.Application.csproj", "{0658ACD2-B915-40AA-A9EF-BB182E104FF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,17 +14,9 @@ Global
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{553A55EE-9417-4C6B-AF42-D2DAD7894981}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5120EEA1-0FF3-4BE1-81D5-8EBD4D9DB9E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{696F1051-340A-4566-B759-551613015AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{696F1051-340A-4566-B759-551613015AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{696F1051-340A-4566-B759-551613015AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{696F1051-340A-4566-B759-551613015AEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0658ACD2-B915-40AA-A9EF-BB182E104FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0658ACD2-B915-40AA-A9EF-BB182E104FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0658ACD2-B915-40AA-A9EF-BB182E104FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0658ACD2-B915-40AA-A9EF-BB182E104FF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
