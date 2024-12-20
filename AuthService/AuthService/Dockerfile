@@ -19,8 +19,8 @@ COPY --from=build-env /App/out ./
 ENV ASPNETCORE_ENVIRONMENT=development
 
 # Expose the required port
-EXPOSE 3005
-ENV ASPNETCORE_URLS=http://+:3005
+EXPOSE 4001
+ENV ASPNETCORE_URLS=http://+:4001
 
 # Use the correct path to the .dll
 ENTRYPOINT ["dotnet", "AuthService.Api.dll"]
