@@ -26,15 +26,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Build the Docker image and tag it with "latest"
-    - name: Build and tag the Docker image as latest
+   # Build the Docker image
+    - name: Build the Docker image
       run: |
-        docker build ./AuthService --file ./AuthService/AuthService/Dockerfile --tag josephrashidmaalouf/auth-service:latest
-        docker build ./AuthService --file ./AuthService/AuthService/Dockerfile --tag josephrashidmaalouf/auth.service:${{ github.run_id }}
+        docker build ./AuthService --file ./AuthService/AuthService/Dockerfile --tag josephrashidmaalouf/auth-service:${{ github.run_id }} --tag josephrashidmaalouf/auth-service:latest
 
-
-    # Push the latest Docker image
-    - name: Push the latest Docker image
-      run: | 
+    # Push both the latest and run-id tagged images
+    - name: Push Docker images
+      run: |
         docker push josephrashidmaalouf/auth-service:latest
         docker push josephrashidmaalouf/auth-service:${{ github.run_id }}
