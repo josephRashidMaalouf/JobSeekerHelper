@@ -5,8 +5,8 @@ WORKDIR /App
 COPY . ./
 
 # Restore and build the project
-RUN dotnet restore AuthService.Api/AuthService.Api.csproj
-RUN dotnet publish AuthService.Api/AuthService.Api.csproj -c Release -o out
+RUN dotnet restore AuthService/AuthService.Api/AuthService.Api.csproj
+RUN dotnet publish AuthService/AuthService.Api/AuthService.Api.csproj -c Release -o out
 
 # Use a smaller runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
