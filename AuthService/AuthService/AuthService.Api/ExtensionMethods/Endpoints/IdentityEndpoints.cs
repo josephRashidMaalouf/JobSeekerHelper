@@ -1,10 +1,11 @@
 ﻿using System.Security.Claims;
 using AuthService.Api.Dtos;
 using AuthService.Infrastructure.Entities;
+using Azure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Api.ExtensionMethods;
+namespace AuthService.Api.ExtensionMethods.Endpoints;
 
 public static class IdentityEndpoints
 {
@@ -14,15 +15,16 @@ public static class IdentityEndpoints
         app.MapGet("/roles", GetRolesAsync).RequireAuthorization();
         app.MapPost("/register-as-user", RegisterAsUserAsync);
         app.MapDelete("/delete", DeleteAsync).RequireAuthorization();
-
         return app;
+        
     }
 
     private static async Task<IResult> LogoutAsync(SignInManager<User> signInManager, [FromBody] object? empty)
     {
         if (empty is null)
+        {
             return Results.Unauthorized();
-
+        }
         await signInManager.SignOutAsync();
 
         return Results.Ok();

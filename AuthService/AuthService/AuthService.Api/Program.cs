@@ -1,4 +1,5 @@
 using AuthService.Api.ExtensionMethods;
+using AuthService.Api.ExtensionMethods.Endpoints;
 using AuthService.Infrastructure.Entities;
 using AuthService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
