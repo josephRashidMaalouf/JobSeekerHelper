@@ -1,0 +1,40 @@
+name: JobSeekerHelper.AuthService Docker Image CI
+
+on:
+  push:
+    branches: 
+      - "main"
+    paths:
+      - "AuthService/**"  
+  pull_request:
+    branches: 
+      - "main"
+    paths:
+      - "AuthService/**"  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Check out the repository
+    - uses: actions/checkout@v4
+    
+    # Log in to Docker Hub
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Build the Docker image and tag it with "latest"
+    - name: Build and tag the Docker image as latest
+      run: |
+        docker build ./AuthService --file ./AuthService/Dockerfile --tag josephrashidmaalouf/auth-service:latest
+        docker build ./AuthService --file ./AuthService/Dockerfile --tag josephrashidmaalouf/auth.service:${{ github.run_id }}
+
+
+    # Push the latest Docker image
+    - name: Push the latest Docker image
+      run: | 
+        docker push josephrashidmaalouf/auth-service:latest
+        docker push josephrashidmaalouf/auth-service:${{ github.run_id }}
