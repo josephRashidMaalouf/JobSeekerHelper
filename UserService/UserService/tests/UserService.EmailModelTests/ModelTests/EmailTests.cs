@@ -3,7 +3,7 @@ using UserService.Domain.Models;
 
 namespace UserService.EmailModelTests.ModelTests;
 
-public class EmailModelTests
+public class EmailTests
 {
     [Theory]
     [InlineData("two@x.xx")]
