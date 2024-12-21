@@ -1,4 +1,3 @@
-using AuthService.Api.ExtensionMethods;
 using AuthService.Api.ExtensionMethods.Endpoints;
 using AuthService.Infrastructure.Entities;
 using AuthService.Infrastructure.Persistence;
@@ -8,6 +7,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +28,20 @@ builder.Services.AddIdentityApiEndpoints<User>()
     .AddRoles<Role>()
     .AddEntityFrameworkStores<AppDbContext>();
 
+
+builder.Host.UseSerilog((context, services, loggerConfiguration) =>
+{
+    // Configure here Serilog instance...
+    loggerConfiguration
+        .MinimumLevel.Information()
+        .Enrich.WithProperty("ApplicationContext", "Ocelot.APIGateway")
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File("app/logs/log-.txt", rollingInterval: RollingInterval.Day)
+        .ReadFrom.Configuration(context.Configuration);
+});
+
+
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService("AuthService"))
     .WithMetrics(metrics =>
@@ -47,6 +61,8 @@ builder.Services.AddOpenTelemetry()
 
         tracing.AddOtlpExporter();
     });
+
+
 
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 

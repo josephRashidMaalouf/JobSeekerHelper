@@ -10,34 +10,11 @@ services:
     volumes:
       - sqlserver_data:/var/opt/mssql
 
-  # job-seeker-bot.dashboard:
-  #   image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
-  #   container_name: dashboard
-  #   ports:
-  #     - 18888:18888
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
+  job-seeker-bot.dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
+    container_name: dashboard
     ports:
-      - "3000:3000"
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: "admin"
-    depends_on:
-      - elasticsearch
-    volumes:
-      - grafana_data:/var/lib/grafana
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.4.0
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - ELASTIC_PASSWORD=elasticpassword
-    ports:
-      - "9200:9200"
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
+      - 18888:18888
 
   auth-service:
     image: josephrashidmaalouf/auth-service:latest
@@ -46,12 +23,15 @@ services:
       - "4001:4001"
     depends_on:
       - sqlserver
-      - elasticsearch
+      - job-seeker-bot.dashboard
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AuthDb;User Id=sa;Password=SuperSafePass.123;TrustServerCertificate=True;"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://elasticsearch:9200"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker-bot.dashboard:18889"
+    volumes:
+      - auth_logs:/app/log
     pull_policy: always
 
 
 volumes:
   sqlserver_data:
+  auth_logs:
