@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Api", "src\UserService.Api\UserService.Api.csproj", "{001FA137-F712-4B38-9D27-42588F0033DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Domain", "src\UserService.Domain\UserService.Domain.csproj", "{4C0BAAB9-BB24-46C6-B2DE-2A19CFDFBB22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Application", "src\UserService.Application\UserService.Application.csproj", "{2623A5D9-36C6-4A89-BCF7-79D9EC06BD39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure", "src\UserService.Infrastructure\UserService.Infrastructure.csproj", "{40E8EF0A-51EC-47FE-B620-326F1A81BD66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{7AA89569-1972-49D8-A9D5-3E020F890130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.EmailModelTests", "tests\UserService.EmailModelTests\UserService.EmailModelTests.csproj", "{C7229350-D810-4074-8E89-F1BB08A97E6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +25,27 @@ Global
 		{001FA137-F712-4B38-9D27-42588F0033DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{001FA137-F712-4B38-9D27-42588F0033DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{001FA137-F712-4B38-9D27-42588F0033DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0BAAB9-BB24-46C6-B2DE-2A19CFDFBB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0BAAB9-BB24-46C6-B2DE-2A19CFDFBB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0BAAB9-BB24-46C6-B2DE-2A19CFDFBB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0BAAB9-BB24-46C6-B2DE-2A19CFDFBB22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2623A5D9-36C6-4A89-BCF7-79D9EC06BD39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2623A5D9-36C6-4A89-BCF7-79D9EC06BD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2623A5D9-36C6-4A89-BCF7-79D9EC06BD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2623A5D9-36C6-4A89-BCF7-79D9EC06BD39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E8EF0A-51EC-47FE-B620-326F1A81BD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E8EF0A-51EC-47FE-B620-326F1A81BD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E8EF0A-51EC-47FE-B620-326F1A81BD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E8EF0A-51EC-47FE-B620-326F1A81BD66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7229350-D810-4074-8E89-F1BB08A97E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7229350-D810-4074-8E89-F1BB08A97E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7229350-D810-4074-8E89-F1BB08A97E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7229350-D810-4074-8E89-F1BB08A97E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C7229350-D810-4074-8E89-F1BB08A97E6C} = {7AA89569-1972-49D8-A9D5-3E020F890130}
 	EndGlobalSection
 EndGlobal
