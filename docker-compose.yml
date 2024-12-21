@@ -28,7 +28,7 @@ services:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AuthDb;User Id=sa;Password=SuperSafePass.123;TrustServerCertificate=True;"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker-bot.dashboard:18889"
     volumes:
-      - auth_logs:/app/log
+      - auth_logs:/logs/log
     pull_policy: always
 
 

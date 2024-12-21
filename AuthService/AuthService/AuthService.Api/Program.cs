@@ -34,10 +34,10 @@ builder.Host.UseSerilog((context, services, loggerConfiguration) =>
     // Configure here Serilog instance...
     loggerConfiguration
         .MinimumLevel.Information()
-        .Enrich.WithProperty("ApplicationContext", "Ocelot.APIGateway")
+        .Enrich.WithProperty("ApplicationContext", "AuthService.Api")
         .Enrich.FromLogContext()
         .WriteTo.Console()
-        .WriteTo.File("app/logs/log-.txt", rollingInterval: RollingInterval.Day)
+        .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
         .ReadFrom.Configuration(context.Configuration);
 });
 
