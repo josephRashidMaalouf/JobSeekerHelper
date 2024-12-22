@@ -5,5 +5,5 @@ namespace UserService.Domain.Interfaces;
 
 public interface ISearchSettingsRepository : ICrud<SearchSettings>
 {
-    Task<Result<List<Resume>>> GetAllByUserIdAsync(Guid userId);
+    Task<Result<List<SearchSettings>>> GetAllByUserIdAsync(Guid userId);
 }
