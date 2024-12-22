@@ -37,10 +37,9 @@ public class EmailTests
     [InlineData("test@email.c   om")]
     [InlineData("user@domain,com")]
     [InlineData("user@domain..com")] 
-    public void SetEmailValue_InvalidFormat_ShouldInvalidEmailException(string email)
+    public void SetEmailValue_InvalidFormat_ShouldThrowInvalidEmailException(string email)
     {
         //Arrange, act and assert
-        
         Assert.Throws<InvalidEmailException>(() => new Email(email));
     }
 }
