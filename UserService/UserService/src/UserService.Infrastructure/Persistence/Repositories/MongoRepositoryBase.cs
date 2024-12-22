@@ -7,7 +7,7 @@ namespace UserService.Infrastructure.Persistence.Repositories;
 
 public abstract class MongoRepositoryBase<TEntity> : ICrud<TEntity> where TEntity : EntityBase
 {
-    private readonly IMongoCollection<TEntity> _collection;
+    protected readonly IMongoCollection<TEntity> _collection;
     
     protected MongoRepositoryBase(string collectionName, string connectionString, string databaseName)
     {
@@ -16,7 +16,6 @@ public abstract class MongoRepositoryBase<TEntity> : ICrud<TEntity> where TEntit
         _collection = db.GetCollection<TEntity>(collectionName);
     }
     
-
     public async Task<Result<TEntity>> GetByIdAsync(Guid id)
     {
         var filter = Builders<TEntity>.Filter.Eq(e => e.Id, id);
