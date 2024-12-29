@@ -10,7 +10,7 @@ public class ResumeService(IResumeRepository repo) : IResumeService
     
     public async Task<Result<Resume>> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _resumeRepository.GetByIdAsync(id);
     }
 
     public async Task<Result<Resume>> AddAsync(Resume entity)
