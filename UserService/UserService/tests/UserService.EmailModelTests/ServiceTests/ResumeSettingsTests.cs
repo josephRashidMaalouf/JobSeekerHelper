@@ -93,7 +93,7 @@ public class ResumeSettingsTests
         var result = await _sut.DeleteAsync(A.Dummy<Guid>());
         
         //Assert
-        Assert.IsType<Result<Resume>>(result);
+        Assert.IsType<Result<Guid>>(result);
         A.CallTo(() => _resumeRepository.DeleteAsync(A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
