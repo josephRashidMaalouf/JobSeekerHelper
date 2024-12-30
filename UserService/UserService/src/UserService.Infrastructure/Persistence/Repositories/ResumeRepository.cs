@@ -15,6 +15,13 @@ public class ResumeRepository(string collectionName, string connectionString, st
         try
         {
             var result = await _collection.Find(filter).ToListAsync();
+
+            if (!result.Any())
+            {
+                return Result<List<Resume>>
+                    .Failure($"No resumes found for user with id {userId}", 404);
+            }
+            
             return Result<List<Resume>>.Success(result);
         }
         catch (Exception ex)
