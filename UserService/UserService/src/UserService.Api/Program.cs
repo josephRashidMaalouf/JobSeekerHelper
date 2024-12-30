@@ -1,3 +1,4 @@
+using UserService.Application.Services;
 using UserService.Domain.Entities;
 using UserService.Domain.Interfaces;
 using UserService.Infrastructure.Persistence.Repositories;
@@ -20,6 +21,9 @@ builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(
     var collectionName = builder.Configuration.GetSection("Database")["SearchSettingsCollection"] ?? "";
     return new SearchSettingsRepository(connectionString, dbName, collectionName);
 });
+
+builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
+builder.Services.AddScoped<IResumeService, ResumeService>();
 
 
 

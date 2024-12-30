@@ -15,21 +15,21 @@ public class ResumeService(IResumeRepository repo) : IResumeService
 
     public async Task<Result<Resume>> AddAsync(Resume entity)
     {
-        throw new NotImplementedException();
+        return await _resumeRepository.AddAsync(entity);
     }
 
     public async Task<Result<Resume>> UpdateAsync(Resume entity)
     {
-        throw new NotImplementedException();
+        return await _resumeRepository.UpdateAsync(entity);
     }
 
     public async Task<Result<Guid>> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _resumeRepository.DeleteAsync(id);
     }
 
-    public async Task<Result<List<SearchSettings>>> GetAllByUserIdAsync(Guid userId)
+    public async Task<Result<List<Resume>>> GetAllByUserIdAsync(Guid userId)
     {
-        throw new NotImplementedException();
+        return await _resumeRepository.GetAllByUserIdAsync(userId);
     }
 }

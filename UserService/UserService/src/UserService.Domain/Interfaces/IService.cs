@@ -5,5 +5,5 @@ namespace UserService.Domain.Interfaces;
 
 public interface IService<T> : ICrud<T> where T : EntityBase
 {
-    Task<Result<List<SearchSettings>>> GetAllByUserIdAsync(Guid userId);
+    Task<Result<List<T>>> GetAllByUserIdAsync(Guid userId);
 }
