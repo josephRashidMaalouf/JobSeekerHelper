@@ -4,10 +4,9 @@ using UserService.Domain.Models;
 
 namespace UserService.Domain.Entities;
 
-public class Resume : EntityBase
+public class Resume : EntityWithUserIdBase
 {
-    [BsonRepresentation(BsonType.String)] 
-    public required Guid UserId { get; set; }
+    
     public required Email Email { get; set; }
     public required string Name { get; set; }
     public required string AboutMe { get; set; }

@@ -29,7 +29,7 @@ public static class ResumeEndpoints
 
     private static async Task<IResult> GetByResumeIdAsync(IResumeService service, Guid resumeId, Guid userId)
     {
-        var result = await service.GetByIdAsync(resumeId);
+        var result = await service.GetByIdAsync(resumeId, userId);
 
         if (!result.IsSuccess)
         {
@@ -41,7 +41,7 @@ public static class ResumeEndpoints
 
     private static async Task<IResult> PostAsync(IResumeService service, Guid userId, Resume resume)
     {
-        var result = await service.AddAsync(resume);
+        var result = await service.AddAsync(resume, userId);
 
         if (!result.IsSuccess)
         {
