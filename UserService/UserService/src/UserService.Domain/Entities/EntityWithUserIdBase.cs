@@ -5,6 +5,6 @@ namespace UserService.Domain.Entities;
 
 public class EntityWithUserIdBase : EntityBase
 {
-    [BsonRepresentation(BsonType.String)] 
+    [BsonRepresentation(BsonType.String)]
     public required Guid UserId { get; set; }
 }

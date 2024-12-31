@@ -23,7 +23,7 @@ public static class ResumeEndpoints
         {
             return result.Code == 404 ? Results.NotFound(result.ErrorMessage) : Results.BadRequest(result.ErrorMessage);
         }
-        
+
         return Results.Ok(result.Data);
     }
 
@@ -35,7 +35,7 @@ public static class ResumeEndpoints
         {
             return result.Code == 404 ? Results.NotFound(result.ErrorMessage) : Results.BadRequest(result.ErrorMessage);
         }
-        
+
         return Results.Ok(result.Data);
     }
 
@@ -47,8 +47,8 @@ public static class ResumeEndpoints
         {
             return result.Code == 404 ? Results.NotFound(result.ErrorMessage) : Results.BadRequest(result.ErrorMessage);
         }
-        
+
         return Results.Ok(result.Data);
     }
-    
+
 }

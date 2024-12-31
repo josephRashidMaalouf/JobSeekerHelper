@@ -7,7 +7,7 @@ namespace UserService.Application.Services;
 public class ResumeService(IResumeRepository repo) : IResumeService
 {
     private readonly IResumeRepository _resumeRepository = repo;
-    
+
     public async Task<Result<Resume>> GetByIdAsync(Guid id, Guid userId)
     {
         return await _resumeRepository.GetByIdAsync(id, userId);

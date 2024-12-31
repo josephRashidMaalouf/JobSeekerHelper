@@ -6,7 +6,7 @@ namespace UserService.Domain.Entities;
 
 public class Resume : EntityWithUserIdBase
 {
-    
+
     public required Email Email { get; set; }
     public required string Name { get; set; }
     public required string AboutMe { get; set; }

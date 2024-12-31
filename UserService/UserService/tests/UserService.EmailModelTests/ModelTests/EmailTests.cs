@@ -18,7 +18,7 @@ public class EmailTests
     {
         //Arrange & Act
         var sut = new Email(email);
-        
+
         //Assert
         Assert.Equal(sut.Value, email);
     }
@@ -36,7 +36,7 @@ public class EmailTests
     [InlineData("test@   email.com")]
     [InlineData("test@email.c   om")]
     [InlineData("user@domain,com")]
-    [InlineData("user@domain..com")] 
+    [InlineData("user@domain..com")]
     public void SetEmailValue_InvalidFormat_ShouldThrowInvalidEmailException(string email)
     {
         //Arrange, act and assert

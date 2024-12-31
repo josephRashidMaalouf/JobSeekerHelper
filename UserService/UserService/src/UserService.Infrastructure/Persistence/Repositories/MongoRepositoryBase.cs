@@ -8,14 +8,14 @@ namespace UserService.Infrastructure.Persistence.Repositories;
 public abstract class MongoRepositoryBase<TEntity> : ICrud<TEntity> where TEntity : EntityWithUserIdBase
 {
     protected readonly IMongoCollection<TEntity> _collection;
-    
+
     protected MongoRepositoryBase(string collectionName, string connectionString, string databaseName)
     {
         var client = new MongoClient(connectionString);
         var db = client.GetDatabase(databaseName);
         _collection = db.GetCollection<TEntity>(collectionName);
     }
-    
+
     public async Task<Result<TEntity>> GetByIdAsync(Guid id, Guid userId)
     {
         var filter = Builders<TEntity>.Filter.And(
@@ -67,7 +67,7 @@ public abstract class MongoRepositoryBase<TEntity> : ICrud<TEntity> where TEntit
             Builders<TEntity>.Filter.Eq(e => e.Id, entity.Id),
             Builders<TEntity>.Filter.Eq(e => e.UserId, userId)
         );
-        
+
         var options = new ReplaceOptions() { IsUpsert = false };
 
         try
@@ -88,7 +88,7 @@ public abstract class MongoRepositoryBase<TEntity> : ICrud<TEntity> where TEntit
         }
     }
 
-    public async Task<Result<Guid>> DeleteAsync(Guid id,  Guid userId)
+    public async Task<Result<Guid>> DeleteAsync(Guid id, Guid userId)
     {
         var filter = Builders<TEntity>.Filter.And(
             Builders<TEntity>.Filter.Eq(e => e.Id, id),

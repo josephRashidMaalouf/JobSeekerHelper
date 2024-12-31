@@ -10,7 +10,7 @@ public class Result<T>
 
     private Result()
     {
-        
+
     }
 
     public static Result<T> Success(T data)

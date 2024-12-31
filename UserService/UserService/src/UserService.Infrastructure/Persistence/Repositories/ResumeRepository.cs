@@ -5,7 +5,7 @@ using UserService.Domain.Models;
 
 namespace UserService.Infrastructure.Persistence.Repositories;
 
-public class ResumeRepository(string collectionName, string connectionString, string databaseName) : 
+public class ResumeRepository(string collectionName, string connectionString, string databaseName) :
     MongoRepositoryBase<Resume>(collectionName, connectionString, databaseName), IResumeRepository
 {
     public async Task<Result<List<Resume>>> GetAllByUserIdAsync(Guid userId)
@@ -21,7 +21,7 @@ public class ResumeRepository(string collectionName, string connectionString, st
                 return Result<List<Resume>>
                     .Failure($"No resumes found for user with id {userId}", 404);
             }
-            
+
             return Result<List<Resume>>.Success(result);
         }
         catch (Exception ex)

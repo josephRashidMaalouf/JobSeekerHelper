@@ -5,7 +5,7 @@ namespace UserService.Domain.Models;
 
 public class Municipality
 {
-    
+
     private SupportedMunicipalities _municipalityName;
 
     public required SupportedMunicipalities MunicipalityName
