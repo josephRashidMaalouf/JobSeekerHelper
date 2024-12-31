@@ -5,5 +5,5 @@ namespace UserService.Domain.Interfaces;
 
 public interface IResumeService : IService<Resume>
 {
-    
+
 }

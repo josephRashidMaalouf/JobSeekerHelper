@@ -7,25 +7,25 @@ namespace UserService.Application.Services;
 public class ResumeService(IResumeRepository repo) : IResumeService
 {
     private readonly IResumeRepository _resumeRepository = repo;
-    
-    public async Task<Result<Resume>> GetByIdAsync(Guid id)
+
+    public async Task<Result<Resume>> GetByIdAsync(Guid id, Guid userId)
     {
-        return await _resumeRepository.GetByIdAsync(id);
+        return await _resumeRepository.GetByIdAsync(id, userId);
     }
 
-    public async Task<Result<Resume>> AddAsync(Resume entity)
+    public async Task<Result<Resume>> AddAsync(Resume entity, Guid userId)
     {
-        return await _resumeRepository.AddAsync(entity);
+        return await _resumeRepository.AddAsync(entity, userId);
     }
 
-    public async Task<Result<Resume>> UpdateAsync(Resume entity)
+    public async Task<Result<Resume>> UpdateAsync(Resume entity, Guid userId)
     {
-        return await _resumeRepository.UpdateAsync(entity);
+        return await _resumeRepository.UpdateAsync(entity, userId);
     }
 
-    public async Task<Result<Guid>> DeleteAsync(Guid id)
+    public async Task<Result<Guid>> DeleteAsync(Guid id, Guid userId)
     {
-        return await _resumeRepository.DeleteAsync(id);
+        return await _resumeRepository.DeleteAsync(id, userId);
     }
 
     public async Task<Result<List<Resume>>> GetAllByUserIdAsync(Guid userId)

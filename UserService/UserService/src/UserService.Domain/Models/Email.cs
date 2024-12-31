@@ -22,7 +22,7 @@ public class Email
 
     public Email(string email)
     {
-        Value = email; 
+        Value = email;
     }
 
     private bool IsValidEmail(string email)

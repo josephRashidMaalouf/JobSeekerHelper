@@ -20,27 +20,27 @@ public class SearchSettingsTests
     {
         //Arrange
         var dummySearchSettings = A.Dummy<SearchSettings>();
-        A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._))
+        A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Success(dummySearchSettings));
-        
-        
+
+
         //Act 
-        var result = await _sut.GetByIdAsync(A.Dummy<Guid>());
+        var result = await _sut.GetByIdAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
 
         //Assert
         Assert.IsType<Result<SearchSettings>>(result);
-        A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._))
+        A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
-    
+
     [Fact]
     public async Task GetAllByIdAsync_CallsRepositoryAndReturnsResult()
     {
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetAllByUserIdAsync(A<Guid>._))
             .Returns(Result<List<SearchSettings>>.Success(A.Dummy<List<SearchSettings>>()));
-        
-        
+
+
         //Act 
         var result = await _sut.GetAllByUserIdAsync(A.Dummy<Guid>());
 
@@ -54,47 +54,47 @@ public class SearchSettingsTests
     public async Task AddAsync_CallsRepositoryAndReturnsResult()
     {
         //Arrange
-        A.CallTo(() => _searchSettingsRepository.AddAsync(A<SearchSettings>._))
+        A.CallTo(() => _searchSettingsRepository.AddAsync(A<SearchSettings>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Success(A.Dummy<SearchSettings>()));
-        
+
         //Act
-        var result = await _sut.AddAsync(A.Dummy<SearchSettings>());
-        
+        var result = await _sut.AddAsync(A.Dummy<SearchSettings>(), A.Dummy<Guid>());
+
         //Assert
         Assert.IsType<Result<SearchSettings>>(result);
-        A.CallTo(() => _searchSettingsRepository.AddAsync(A<SearchSettings>._))
+        A.CallTo(() => _searchSettingsRepository.AddAsync(A<SearchSettings>._, A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
-    
+
     [Fact]
     public async Task UpdateAsync_CallsRepositoryAndReturnsResult()
     {
         //Arrange
-        A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._))
+        A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Success(A.Dummy<SearchSettings>()));
-        
+
         //Act
-        var result = await _sut.UpdateAsync(A.Dummy<SearchSettings>());
-        
+        var result = await _sut.UpdateAsync(A.Dummy<SearchSettings>(), A.Dummy<Guid>());
+
         //Assert
         Assert.IsType<Result<SearchSettings>>(result);
-        A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._))
+        A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._, A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
-    
+
     [Fact]
     public async Task DeleteAsync_CallsRepositoryAndReturnsResult()
     {
         //Arrange
-        A.CallTo(() => _searchSettingsRepository.DeleteAsync(A<Guid>._))
+        A.CallTo(() => _searchSettingsRepository.DeleteAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<Guid>.Success(A.Dummy<Guid>()));
-        
+
         //Act
-        var result = await _sut.DeleteAsync(A.Dummy<Guid>());
-        
+        var result = await _sut.DeleteAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
+
         //Assert
         Assert.IsType<Result<Guid>>(result);
-        A.CallTo(() => _searchSettingsRepository.DeleteAsync(A<Guid>._))
+        A.CallTo(() => _searchSettingsRepository.DeleteAsync(A<Guid>._, A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
 }

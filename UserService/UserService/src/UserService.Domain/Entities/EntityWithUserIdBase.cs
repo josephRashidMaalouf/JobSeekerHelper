@@ -3,9 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace UserService.Domain.Entities;
 
-public class EntityBase
+public class EntityWithUserIdBase : EntityBase
 {
-    [BsonId]
     [BsonRepresentation(BsonType.String)]
-    public required Guid Id { get; set; } = Guid.NewGuid();
+    public required Guid UserId { get; set; }
 }
