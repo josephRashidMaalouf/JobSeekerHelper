@@ -1,3 +1,4 @@
+using UserService.Api.Endpoints;
 using UserService.Application.Services;
 using UserService.Domain.Entities;
 using UserService.Domain.Interfaces;
@@ -35,5 +36,6 @@ app.MapOpenApi();
 
 app.UseHttpsRedirection();
 
+app.MapEndpoints();
 
 app.Run();
