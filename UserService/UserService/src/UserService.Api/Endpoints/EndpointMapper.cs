@@ -7,7 +7,7 @@ public static class EndpointMapper
 
         app.MapResumeEndpoints();
         app.MapSearchSettingsEndpoints();
-        
+
         return app;
     }
 }
