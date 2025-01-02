@@ -10,7 +10,12 @@ services:
     volumes:
       - sqlserver_data:/var/opt/mssql
 
-  job-seeker-bot.dashboard:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  job-seeker.dashboard:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
     container_name: dashboard
     ports:
@@ -23,15 +28,33 @@ services:
       - "4001:4001"
     depends_on:
       - sqlserver
-      - job-seeker-bot.dashboard
+      - job-seeker.dashboard
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=AuthDb;User Id=sa;Password=SuperSafePass.123;TrustServerCertificate=True;"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker-bot.dashboard:18889"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker.dashboard:18889"
     volumes:
       - auth_logs:/logs/log
     pull_policy: always
 
+user-service:
+  image: josephrashidmaalouf/user-service:latest
+  container_name: user-service
+  ports:
+    - "4001:4001"
+  depends_on:
+    - job-seeker.dashboard
+    - mongodb
+  environment: 
+    ConnectionStrings__DefaultConnection : ""
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker.dashboard:18889"
+  volumes:
+    - service_logs:/logs/log
+  pull_policy: always
+
+
 
 volumes:
   sqlserver_data:
+  mongodb_data:
   auth_logs:
+  user_logs:
