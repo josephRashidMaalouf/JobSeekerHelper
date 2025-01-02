@@ -26,7 +26,6 @@ builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(
 builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
 builder.Services.AddScoped<IResumeService, ResumeService>();
 
-
 var app = builder.Build();
 
 
