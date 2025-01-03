@@ -31,7 +31,6 @@ var app = builder.Build();
 
 app.MapOpenApi();
 
-
 app.UseHttpsRedirection();
 
 app.MapEndpoints();
