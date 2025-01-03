@@ -36,20 +36,20 @@ services:
       - auth_logs:/logs/log
     pull_policy: always
 
-user-service:
-  image: josephrashidmaalouf/user-service:latest
-  container_name: user-service
-  ports:
-    - "4001:4001"
-  depends_on:
-    - job-seeker.dashboard
-    - mongodb
-  environment: 
-    ConnectionStrings__DefaultConnection : ""
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker.dashboard:18889"
-  volumes:
-    - service_logs:/logs/log
-  pull_policy: always
+  user-service:
+    image: josephrashidmaalouf/user-service:latest
+    container_name: user-service
+    ports:
+      - "4002:4002"
+    depends_on:
+      - job-seeker.dashboard
+      - mongodb
+    environment: 
+      ConnectionStrings__DefaultConnection : "mongodb://mongodb:27017"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker.dashboard:18889"
+    volumes:
+      - user_logs:/logs/log
+    pull_policy: always
 
 
 
