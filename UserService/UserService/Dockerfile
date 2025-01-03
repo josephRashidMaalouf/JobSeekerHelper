@@ -5,8 +5,8 @@ WORKDIR /App
 COPY . ./
 
 # Restore and build the project
-RUN dotnet restore UserService/UserService.Api/UserService.Api.csproj
-RUN dotnet publish UserService/UserService.Api/UserService.Api.csproj -c Release -o out
+RUN dotnet restore UserService/src/UserService.Api/UserService.Api.csproj
+RUN dotnet publish UserService/src/UserService.Api/UserService.Api.csproj -c Release -o out
 
 # Use a smaller runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
