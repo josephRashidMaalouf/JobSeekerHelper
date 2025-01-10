@@ -12,7 +12,7 @@ public class GuidConverter : JsonConverter<Guid>
         {
             return guid == Guid.Empty ? Guid.NewGuid() : guid;
         }
-
+        
         return Guid.NewGuid();
     }
 

@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Http.Json;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 using Serilog;
+using UserService.Api.Converters;
 using UserService.Api.Endpoints;
 using UserService.Application.Services;
 using UserService.Domain.Entities;
@@ -31,6 +33,12 @@ builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(
 
 builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
 builder.Services.AddScoped<IResumeService, ResumeService>();
+
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.Converters.Add(new GuidConverter()); 
+    options.SerializerOptions.Converters.Add(new DateOnlyConverter());
+});
 
 
 builder.Host.UseSerilog((context, services, loggerConfiguration) =>

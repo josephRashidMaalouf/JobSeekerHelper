@@ -2,7 +2,7 @@
 
 public class InvalidEmailException : Exception
 {
-    public InvalidEmailException() : base("Invalid email address.")
+    public InvalidEmailException() : base("Invalid email address. Expected format: xxx@xxx.xx")
     {
 
     }
