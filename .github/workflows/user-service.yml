@@ -18,6 +18,24 @@ jobs:
     steps:
     # Check out the repository
     - uses: actions/checkout@v4
+
+     # Set up .NET
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 9.0.x
+    
+    # Restore dependencies
+    - name: Restore dependencies
+      run: dotnet restore ./UserService/UserService.sln
+    
+    # Build the solution
+    - name: Build solution
+      run: dotnet build ./UserService/UserService.sln --no-restore --configuration Release
+    
+    # Run tests
+    - name: Run tests
+      run: dotnet test ./UserService/UserService.sln --no-build --configuration Release --logger trx
     
     # Log in to Docker Hub
     - name: Log in to Docker Hub
