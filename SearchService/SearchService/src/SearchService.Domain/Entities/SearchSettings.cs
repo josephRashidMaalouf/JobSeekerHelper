@@ -18,4 +18,5 @@ public class SearchSettings
     public required SearchFrequency Frequency { get; set; }
     public required Guid ResumeId { get; set; }
     public required bool GenerateLetters { get; set; }
+    public bool IsActive { get; set; }
 }
