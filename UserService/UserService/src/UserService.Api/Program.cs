@@ -68,7 +68,6 @@ builder.Services.AddOpenTelemetry()
 
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
-
 var app = builder.Build();
 
 app.MapOpenApi();
