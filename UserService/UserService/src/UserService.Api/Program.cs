@@ -1,3 +1,4 @@
+using Scalar.AspNetCore;
 using UserService.Api.Endpoints;
 using UserService.Application.Services;
 using UserService.Domain.Entities;
@@ -30,6 +31,12 @@ var app = builder.Build();
 
 
 app.MapOpenApi();
+app.MapScalarApiReference(options =>
+{
+    options
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+        .WithApiKeyAuthentication(keyOptions => keyOptions.Token = "apikey");
+});
 
 app.UseHttpsRedirection();
 
