@@ -27,15 +27,15 @@ jobs:
     
     # Restore dependencies
     - name: Restore dependencies
-      run: dotnet restore ./UserService/UserService.sln
+      run: dotnet restore ./UserService/UserService/UserService.sln
     
     # Build the solution
     - name: Build solution
-      run: dotnet build ./UserService/UserService.sln --no-restore --configuration Release
+      run: dotnet build ./UserService/UserService/UserService.sln --no-restore --configuration Release
     
     # Run tests
     - name: Run tests
-      run: dotnet test ./UserService/UserService.sln --no-build --configuration Release --logger trx
+      run: dotnet test ./UserService/UserService/UserService.sln --no-build --configuration Release --logger trx
     
     # Log in to Docker Hub
     - name: Log in to Docker Hub
