@@ -1,4 +1,9 @@
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
+using Serilog;
 using UserService.Api.Endpoints;
 using UserService.Application.Services;
 using UserService.Domain.Entities;
@@ -26,6 +31,43 @@ builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(
 
 builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
 builder.Services.AddScoped<IResumeService, ResumeService>();
+
+
+builder.Host.UseSerilog((context, services, loggerConfiguration) =>
+{
+    // Configure here Serilog instance...
+    loggerConfiguration
+        .MinimumLevel.Information()
+        .Enrich.WithProperty("ApplicationContext", "UserService.Api")
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+        .ReadFrom.Configuration(context.Configuration);
+});
+
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("UserService"))
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation();
+
+        metrics.AddOtlpExporter();
+    })
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation();
+
+        tracing.AddOtlpExporter();
+    });
+
+
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
+
 
 var app = builder.Build();
 
