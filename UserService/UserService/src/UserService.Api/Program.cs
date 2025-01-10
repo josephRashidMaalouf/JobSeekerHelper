@@ -29,7 +29,6 @@ builder.Services.AddScoped<IResumeService, ResumeService>();
 
 var app = builder.Build();
 
-
 app.MapOpenApi();
 app.MapScalarApiReference(options =>
 {
