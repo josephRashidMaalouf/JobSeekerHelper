@@ -5,21 +5,26 @@ namespace UserService.Domain.Models;
 
 public class Email
 {
-    private string _email = string.Empty;
+    private string _value = string.Empty;
 
     public string Value
     {
-        get => _email;
+        get => _value;
         set
         {
             if (!IsValidEmail(value))
             {
                 throw new InvalidEmailException();
             }
-            _email = value;
+            _value = value;
         }
     }
 
+    //Empty constructor needed for json deserializing
+    public Email()
+    {
+        
+    }
     public Email(string email)
     {
         Value = email;
@@ -33,7 +38,7 @@ public class Email
 
     public override string ToString()
     {
-        return _email;
+        return _value;
     }
 
 }
