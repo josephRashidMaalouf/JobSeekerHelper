@@ -25,13 +25,7 @@ builder.Services.AddScoped<IResumeRepository, ResumeRepository>(provider =>
     var collectionName = builder.Configuration.GetSection("Database")["Resumes"] ?? "";
     return new ResumeRepository(collectionName, connectionString, dbName);
 });
-builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(provider =>
-{
-    var collectionName = builder.Configuration.GetSection("Database")["SearchSettings"] ?? "";
-    return new SearchSettingsRepository(collectionName, connectionString, dbName);
-});
 
-builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
 builder.Services.AddScoped<IResumeService, ResumeService>();
 
 builder.Services.Configure<JsonOptions>(options =>
