@@ -48,7 +48,7 @@ public static class SearchSettingsEndpoints
 
         if (!result.IsSuccess)
         {
-            Results.BadRequest(result.ErrorMessage);
+            return Results.BadRequest(result.ErrorMessage);
         }
 
         return Results.Ok(result.Data);

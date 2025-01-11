@@ -76,7 +76,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.MapOpenApi();
-app.MapOpenApi();
 app.MapScalarApiReference(options =>
 {
     options
