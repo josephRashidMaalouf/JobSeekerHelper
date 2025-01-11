@@ -1,4 +1,4 @@
-﻿namespace UserService.Domain.Exceptions;
+﻿namespace SearchService.Domain.Exceptions;
 
 public class InvalidFrequencyException : Exception
 {

@@ -1,8 +1,8 @@
-﻿using UserService.Domain.Entities;
-using UserService.Domain.Interfaces;
-using UserService.Domain.Models;
+﻿using SearchService.Domain.Entities;
+using SearchService.Domain.Interfaces;
+using SearchService.Domain.Models;
 
-namespace UserService.Application.Services;
+namespace SearchService.Application.Services;
 
 public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSettingsService
 {

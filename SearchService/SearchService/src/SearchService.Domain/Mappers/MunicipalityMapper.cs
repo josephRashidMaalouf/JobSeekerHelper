@@ -1,6 +1,6 @@
-﻿using UserService.Domain.Enums;
+﻿using SearchService.Domain.Enums;
 
-namespace UserService.Domain.Mappers;
+namespace SearchService.Domain.Mappers;
 
 public class MunicipalityMapper
 {

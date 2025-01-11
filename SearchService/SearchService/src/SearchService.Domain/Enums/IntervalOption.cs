@@ -1,4 +1,4 @@
-﻿namespace UserService.Domain.Enums;
+﻿namespace SearchService.Domain.Enums;
 
 public enum IntervalOption
 {

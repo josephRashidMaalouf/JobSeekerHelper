@@ -1,7 +1,7 @@
-﻿using UserService.Domain.Enums;
-using UserService.Domain.Exceptions;
+﻿using SearchService.Domain.Enums;
+using SearchService.Domain.Exceptions;
 
-namespace UserService.Domain.Models;
+namespace SearchService.Domain.Models;
 
 public class SearchFrequency
 {

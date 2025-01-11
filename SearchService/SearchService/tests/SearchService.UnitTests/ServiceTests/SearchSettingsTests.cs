@@ -1,10 +1,10 @@
 ﻿using FakeItEasy;
-using UserService.Application.Services;
-using UserService.Domain.Entities;
-using UserService.Domain.Interfaces;
-using UserService.Domain.Models;
+using SearchService.Application.Services;
+using SearchService.Domain.Entities;
+using SearchService.Domain.Interfaces;
+using SearchService.Domain.Models;
 
-namespace UserService.EmailModelTests.ServiceTests;
+namespace SearchService.UnitTests.ServiceTests;
 
 public class SearchSettingsTests
 {

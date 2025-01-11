@@ -1,7 +1,7 @@
-﻿using UserService.Domain.Entities;
-using UserService.Domain.Models;
+﻿using SearchService.Domain.Entities;
+using SearchService.Domain.Models;
 
-namespace UserService.Domain.Interfaces;
+namespace SearchService.Domain.Interfaces;
 
 public interface ISearchSettingsRepository : ICrud<SearchSettings>
 {

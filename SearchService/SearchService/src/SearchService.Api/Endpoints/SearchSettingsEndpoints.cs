@@ -1,7 +1,7 @@
-﻿using UserService.Domain.Entities;
-using UserService.Domain.Interfaces;
+﻿using SearchService.Domain.Entities;
+using SearchService.Domain.Interfaces;
 
-namespace UserService.Api.Endpoints;
+namespace SearchService.Api.Endpoints;
 
 public static class SearchSettingsEndpoints
 {
@@ -48,7 +48,7 @@ public static class SearchSettingsEndpoints
 
         if (!result.IsSuccess)
         {
-            Results.BadRequest(result.ErrorMessage);
+            return Results.BadRequest(result.ErrorMessage);
         }
 
         return Results.Ok(result.Data);
