@@ -10,7 +10,7 @@ public class SearchSettings
     [BsonRepresentation(BsonType.String)]
     public required Guid Id { get; set; } = Guid.NewGuid();
 
-    [BsonRepresentation(BsonType.String)] 
+    [BsonRepresentation(BsonType.String)]
     public required Guid UserId { get; set; }
 
     public required string SearchQuery { get; set; }
