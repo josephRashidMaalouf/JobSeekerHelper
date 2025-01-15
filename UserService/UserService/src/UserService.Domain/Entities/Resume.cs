@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using JobSeekerHelper.Nuget.Entities;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using UserService.Domain.Models;
 

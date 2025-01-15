@@ -1,7 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using JobSeekerHelper.Nuget.Repositories;
+using JobSeekerHelper.Nuget.Results;
+using MongoDB.Driver;
 using UserService.Domain.Entities;
 using UserService.Domain.Interfaces;
-using UserService.Domain.Models;
 
 namespace UserService.Infrastructure.Persistence.Repositories;
 

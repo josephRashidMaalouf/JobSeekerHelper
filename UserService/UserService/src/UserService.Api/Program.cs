@@ -1,14 +1,6 @@
-using Microsoft.AspNetCore.Http.Json;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-using Scalar.AspNetCore;
-using Serilog;
-using UserService.Api.Converters;
+using JobSeekerHelper.Nuget.Extensions;
 using UserService.Api.Endpoints;
 using UserService.Application.Services;
-using UserService.Domain.Entities;
 using UserService.Domain.Interfaces;
 using UserService.Infrastructure.Persistence.Repositories;
 
@@ -28,57 +20,15 @@ builder.Services.AddScoped<IResumeRepository, ResumeRepository>(provider =>
 
 builder.Services.AddScoped<IResumeService, ResumeService>();
 
-builder.Services.Configure<JsonOptions>(options =>
-{
-    options.SerializerOptions.Converters.Add(new GuidConverter()); 
-    options.SerializerOptions.Converters.Add(new DateOnlyConverter());
-});
+builder.SetUpMicroService(builder.Configuration["ServiceName"] ?? "UserService");
 
 
-builder.Host.UseSerilog((context, services, loggerConfiguration) =>
-{
-    // Configure here Serilog instance...
-    loggerConfiguration
-        .MinimumLevel.Information()
-        .Enrich.WithProperty("ApplicationContext", "UserService.Api")
-        .Enrich.FromLogContext()
-        .WriteTo.Console()
-        .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
-        .ReadFrom.Configuration(context.Configuration);
-});
-
-
-builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService("UserService"))
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation();
-
-        metrics.AddOtlpExporter();
-    })
-    .WithTracing(tracing =>
-    {
-        tracing
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation();
-
-        tracing.AddOtlpExporter();
-    });
-
-
-builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 var app = builder.Build();
 
 app.MapOpenApi();
-app.MapScalarApiReference(options =>
-{
-    options
-        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-        .WithApiKeyAuthentication(keyOptions => keyOptions.Token = "apikey");
-});
+
+app.SetUpMicroService();
 
 app.UseHttpsRedirection();
 

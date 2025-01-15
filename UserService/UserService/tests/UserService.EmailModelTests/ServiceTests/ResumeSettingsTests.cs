@@ -1,4 +1,5 @@
 ﻿using FakeItEasy;
+using JobSeekerHelper.Nuget.Results;
 using UserService.Application.Services;
 using UserService.Domain.Entities;
 using UserService.Domain.Interfaces;
