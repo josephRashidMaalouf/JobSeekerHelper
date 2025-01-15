@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>JobSeekerHelper.Nuget</Title>
+    <Authors>Joseph Rashid-Maalouf</Authors>
+    <Description>Classes for global use within the JobSeekerHelper project</Description>
+    <PackageProjectUrl>https://github.com/josephRashidMaalouf/JobSeekerHelper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/josephRashidMaalouf/JobSeekerHelper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>0.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+</Project>
