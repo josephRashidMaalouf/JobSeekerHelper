@@ -8,6 +8,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Microsoft.AspNetCore.Builder;
+using Scalar.AspNetCore;
 
 namespace JobSeekerHelper.Nuget.Extensions;
 
@@ -17,7 +18,7 @@ public static class GlobalExtensionPoints
     /// Set up microservice with common settings
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="additionalMetrics">List of meter names to record by Open Telemetry</param>
+    /// <param name="serviceName">Name of the micro-service using this extension in order to set up logging</param>
     /// <returns></returns>
     public static WebApplicationBuilder SetUpMicroService(this WebApplicationBuilder builder, string serviceName)
     {
@@ -64,5 +65,22 @@ public static class GlobalExtensionPoints
         builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
         return builder;
+    }
+
+    /// <summary>
+    /// Configure application for common things, for example providing metrics and configuration debug tool
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
+    public static WebApplication SetUpMicroService(this WebApplication app)
+    {
+        
+        app.MapScalarApiReference(options =>
+        {
+            options
+                .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+                .WithApiKeyAuthentication(keyOptions => keyOptions.Token = "apikey");
+        });
+        return app;
     }
 }
