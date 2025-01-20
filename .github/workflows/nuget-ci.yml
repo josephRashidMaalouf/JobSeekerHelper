@@ -40,9 +40,11 @@ jobs:
           fi
 
       - name: Build the project
+        if: env.skip != 'true'
         run: dotnet build ./Nuget/JobSeekerHelper.Nuget --configuration Release
 
       - name: Pack the NuGet package
+        if: env.skip != 'true'
         run: dotnet pack ./Nuget/JobSeekerHelper.Nuget --configuration Release --no-build
 
       - name: Push NuGet package to nuget.org
