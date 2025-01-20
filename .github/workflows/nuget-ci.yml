@@ -1,0 +1,48 @@
+name: JobSeekerHelper.AuthService Docker Image CI
+
+on:
+  push:
+    branches: 
+      - "main"
+    paths:
+      - "Nuget/**"  
+  pull_request:
+    branches: 
+      - "main"
+    paths:
+      - "Nuget/**"  
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  NuGetDirectory: "nuget_packages" 
+
+jobs:
+  create_nuget:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8'
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
+    
+    # Create the NuGet package in the folder from the environment variable NuGetDirectory
+    - name: Build packages
+      run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
+
+    # Publish all NuGet packages to NuGet.org
+    # Use --skip-duplicate to prevent errors if a package with the same version already exists.
+    # If you retry a failed workflow, already published packages will be skipped without error.
+    - name: Publish NuGet package
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
+      run: |
+        for file in "${{ env.NuGetDirectory }}/*.nupkg"; do
+          dotnet nuget push $file --skip-duplicate --source "job-seeker-helper"
+        done
