@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/josephRashidMaalouf/JobSeekerHelper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/josephRashidMaalouf/JobSeekerHelper</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.0.2</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
