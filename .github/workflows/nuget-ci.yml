@@ -21,12 +21,12 @@ jobs:
           dotnet-version: '9.x'  # Update with your desired .NET version
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./Nuget/JobSeekerHelper.Nuget
 
       - name: Get the version from csproj file
         id: version
         run: |
-          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" JobSeekerHelper.Nuget.csproj)  # Adjust for your csproj location
+          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ./Nuget/JobSeekerHelper.Nuget/JobSeekerHelper.Nuget.csproj)  # Adjust for your csproj location
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Check if version already exists on NuGet
@@ -40,10 +40,10 @@ jobs:
           fi
 
       - name: Build the project
-        run: dotnet build --configuration Release
+        run: dotnet build ./Nuget/JobSeekerHelper.Nuget --configuration Release
 
       - name: Pack the NuGet package
-        run: dotnet pack --configuration Release --no-build
+        run: dotnet pack ./Nuget/JobSeekerHelper.Nuget --configuration Release --no-build
 
       - name: Push NuGet package to nuget.org
         if: env.skip != 'true'
