@@ -26,7 +26,7 @@ jobs:
       - name: Get the version from csproj file
         id: version
         run: |
-          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ./Nuget/JobSeekerHelper.Nuget/src/JobSeekerHelper.Nuget.csproj)  # Adjust for your csproj location
+          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" ./Nuget/JobSeekerHelper.Nuget/src/JobSeekerHelper.Nuget/JobSeekerHelper.Nuget.csproj)  # Adjust for your csproj location
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Check if version already exists on NuGet
