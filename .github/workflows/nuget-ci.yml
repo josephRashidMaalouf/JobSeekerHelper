@@ -26,13 +26,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8'
+        dotnet-version: '9'
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
     
     # Create the NuGet package in the folder from the environment variable NuGetDirectory
     - name: Build packages
-      run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+      run: dotnet pack --configuration Release 
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
 
@@ -42,7 +42,4 @@ jobs:
     - name: Publish NuGet package
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY }}
-      run: |
-        for file in "${{ env.NuGetDirectory }}/*.nupkg"; do
-          dotnet nuget push $file --skip-duplicate --source "job-seeker-helper"
-        done
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --source https://api.nuget.org/v3/index.json
