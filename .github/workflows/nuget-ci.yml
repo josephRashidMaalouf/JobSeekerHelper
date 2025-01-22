@@ -32,9 +32,9 @@ jobs:
       - name: Check if version already exists on NuGet
         id: version_check
         run: |
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3/registration5-gz-semver2/$VERSION/index.json")
-          echo "HTTP Response: $RESPONSE"
-          if [ "$RESPONSE" == "200" ]; then
+          PACKAGE_ID="jobseekerhelper.nuget"
+          RESPONSE=$(curl -s "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID/index.json" | jq -r '.versions | index("'$VERSION'")')
+          if [ "$RESPONSE" != "null" ]; then
             echo "Version $VERSION already exists on NuGet. Skipping push."
             echo "skip=true" >> $GITHUB_ENV
           fi
@@ -49,4 +49,4 @@ jobs:
 
       - name: Push NuGet package to nuget.org
         if: env.skip != 'true'
-        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
