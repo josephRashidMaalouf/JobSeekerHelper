@@ -27,10 +27,10 @@ public class SearchFrequencyTests
         //Arrange and act
         var result = new SearchFrequency
         {
-            Frequency = value, 
+            Frequency = value,
             Interval = A.Dummy<IntervalOption>()
         };
-        
+
         Assert.Equal(value, result.Frequency);
     }
 }

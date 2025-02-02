@@ -11,7 +11,7 @@ public class SearchSettingsRepository : MongoRepositoryBase<SearchSettings>, ISe
     public SearchSettingsRepository(string collectionName, string connectionString, string databaseName) : base(
         collectionName, connectionString, databaseName)
     {
-        
+
     }
 
     public async Task<Result<List<SearchSettings>>> GetAllByUserIdAsync(Guid userId)
