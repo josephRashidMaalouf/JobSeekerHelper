@@ -1,4 +1,5 @@
-﻿using SearchService.Domain.Entities;
+﻿using JobSeekerHelper.Nuget.Results;
+using SearchService.Domain.Entities;
 using SearchService.Domain.Interfaces;
 using SearchService.Domain.Models;
 
