@@ -1,18 +1,12 @@
-﻿using MongoDB.Bson;
+﻿using JobSeekerHelper.Nuget.Entities;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using SearchService.Domain.Models;
 
 namespace SearchService.Domain.Entities;
 
-public class SearchSettings
+public class SearchSettings : EntityWithUserIdBase
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.String)]
-    public required Guid Id { get; set; } = Guid.NewGuid();
-
-    [BsonRepresentation(BsonType.String)]
-    public required Guid UserId { get; set; }
-
     [BsonRepresentation(BsonType.String)]
     public required Guid ResumeId { get; set; }
     public required string SearchQuery { get; set; }

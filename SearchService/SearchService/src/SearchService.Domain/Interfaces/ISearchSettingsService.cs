@@ -1,4 +1,5 @@
-﻿using SearchService.Domain.Entities;
+﻿using JobSeekerHelper.Nuget.Interfaces;
+using SearchService.Domain.Entities;
 
 namespace SearchService.Domain.Interfaces;
 
