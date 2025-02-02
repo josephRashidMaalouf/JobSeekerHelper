@@ -1,7 +1,6 @@
 ﻿using JobSeekerHelper.Nuget.Interfaces;
 using JobSeekerHelper.Nuget.Results;
 using SearchService.Domain.Entities;
-using SearchService.Domain.Models;
 
 namespace SearchService.Domain.Interfaces;
 

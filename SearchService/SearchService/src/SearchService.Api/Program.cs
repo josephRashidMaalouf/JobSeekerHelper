@@ -1,10 +1,4 @@
 using JobSeekerHelper.Nuget.Extensions;
-using Microsoft.AspNetCore.Http.Json;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-using Scalar.AspNetCore;
 using SearchService.Api.Endpoints;
 using SearchService.Domain.Interfaces;
 using SearchService.Infrastructure.Repositories;

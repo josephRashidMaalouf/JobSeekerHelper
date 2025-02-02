@@ -3,7 +3,6 @@ using JobSeekerHelper.Nuget.Results;
 using MongoDB.Driver;
 using SearchService.Domain.Entities;
 using SearchService.Domain.Interfaces;
-using SearchService.Domain.Models;
 
 namespace SearchService.Infrastructure.Repositories;
 
