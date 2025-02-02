@@ -14,6 +14,8 @@ public static class SearchSettingsEndpoints
         group.MapPost("", PostAsync);
         group.MapPut("", UpdateAsync);
         group.MapDelete("", DeleteAsync);
+        // group.MapPut("/start/{settingsId}", StartSearchAsync);
+        // group.MapPut("/stop/{settingsId}", StopSearchAsync);
 
         return group;
     }
