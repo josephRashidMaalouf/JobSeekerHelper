@@ -97,4 +97,19 @@ public class SearchSettingsTests
         A.CallTo(() => _searchSettingsRepository.DeleteAsync(A<Guid>._, A<Guid>._))
             .MustHaveHappenedOnceExactly();
     }
+
+    [Fact]
+    public async Task StartSearchAsync_EntityNotFound_ReturnsFalseBoolResult()
+    {
+        //Arrange
+        A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
+            .Returns(Result<SearchSettings>.Failure("Not found", 404));
+        
+        //Act
+        var result = await _sut.StartSearchAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
+        
+        //Assert
+        Assert.IsType<Result<bool>>(result);
+        Assert.False(result.IsSuccess);
+    }
 }
