@@ -40,15 +40,15 @@ public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSett
             return Result<bool>.Failure(result.ErrorMessage ?? $"Could not find searchSetting with id: {settingsId}, belonging to user: {userId}", result.Code);
         }
         result.Data!.IsActive = true;
-        
+
         var updateResult = await _searchSettingsRepository.UpdateAsync(result.Data, userId);
-        
+
         if (!updateResult.IsSuccess)
         {
             return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong. No search has started for searchSetting with id:" +
                 $"{settingsId}, belonging to user: {userId}. Search did not start", result.Code);
         }
-        
+
         return Result<bool>.Success(true);
 
     }
@@ -61,15 +61,15 @@ public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSett
             return Result<bool>.Failure(result.ErrorMessage ?? $"Could not find searchSetting with id: {settingsId}, belonging to user: {userId}", result.Code);
         }
         result.Data!.IsActive = false;
-        
+
         var updateResult = await _searchSettingsRepository.UpdateAsync(result.Data, userId);
-        
+
         if (!updateResult.IsSuccess)
         {
             return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong. No search has started for searchSetting with id:" +
                 $"{settingsId}, belonging to user: {userId}. Start did not stop.", result.Code);
         }
-        
+
         return Result<bool>.Success(true);
     }
 }

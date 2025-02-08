@@ -104,10 +104,10 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Failure("Not found", 404));
-        
+
         //Act
         var result = await _sut.StartSearchAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.False(result.IsSuccess);
@@ -120,13 +120,13 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Success(A.Dummy<SearchSettings>()));
-        
+
         A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Failure("Could not update", 404));
-        
+
         //Act
         var result = await _sut.StartSearchAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.False(result.IsSuccess);
@@ -142,13 +142,13 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(settingsGuid, userGuid))
             .Returns(Result<SearchSettings>.Success(dummySearchSettings));
-        
+
         A.CallTo(() => _searchSettingsRepository.UpdateAsync(dummySearchSettings, userGuid))
             .Returns(Result<SearchSettings>.Success(dummySearchSettings));
-        
+
         //Act
         var result = await _sut.StartSearchAsync(settingsGuid, userGuid);
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.True(result.IsSuccess);
@@ -163,10 +163,10 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Failure("Not found", 404));
-        
+
         //Act
         var result = await _sut.StopSearchAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.False(result.IsSuccess);
@@ -179,13 +179,13 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(A<Guid>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Success(A.Dummy<SearchSettings>()));
-        
+
         A.CallTo(() => _searchSettingsRepository.UpdateAsync(A<SearchSettings>._, A<Guid>._))
             .Returns(Result<SearchSettings>.Failure("Could not update", 404));
-        
+
         //Act
         var result = await _sut.StopSearchAsync(A.Dummy<Guid>(), A.Dummy<Guid>());
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.False(result.IsSuccess);
@@ -201,13 +201,13 @@ public class SearchSettingsTests
         //Arrange
         A.CallTo(() => _searchSettingsRepository.GetByIdAsync(settingsGuid, userGuid))
             .Returns(Result<SearchSettings>.Success(dummySearchSettings));
-        
+
         A.CallTo(() => _searchSettingsRepository.UpdateAsync(dummySearchSettings, userGuid))
             .Returns(Result<SearchSettings>.Success(dummySearchSettings));
-        
+
         //Act
         var result = await _sut.StopSearchAsync(settingsGuid, userGuid);
-        
+
         //Assert
         Assert.IsType<Result<bool>>(result);
         Assert.True(result.IsSuccess);
