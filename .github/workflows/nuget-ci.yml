@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "Nuget/**"  
+  pull_request:
+    branches: 
+      - "main"
+    paths:
+      - "Nuget/**"  
     tags:
       - 'v*'  # Match tags like v1.0.0, v2.1.0, etc.
 
