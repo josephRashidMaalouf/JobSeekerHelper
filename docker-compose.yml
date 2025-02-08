@@ -50,6 +50,22 @@ services:
     volumes:
       - user_logs:/logs/log
     pull_policy: always
+  
+  search-service:
+    image: josephrashidmaalouf/search-service:latest
+    container_name: search-service
+    ports:
+      - "4003:4003"
+    depends_on:
+      - job-seeker.dashboard
+      - mongodb
+    environment: 
+      ConnectionStrings__DefaultConnection : "mongodb://mongodb:27017"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://job-seeker.dashboard:18889"
+    volumes:
+      - search_logs:/logs/log
+    pull_policy: always
+
 
 
 
