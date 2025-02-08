@@ -1,5 +1,6 @@
 using JobSeekerHelper.Nuget.Extensions;
 using SearchService.Api.Endpoints;
+using SearchService.Application.Services;
 using SearchService.Domain.Interfaces;
 using SearchService.Infrastructure.Repositories;
 
@@ -18,6 +19,7 @@ builder.Services.AddScoped<ISearchSettingsRepository, SearchSettingsRepository>(
     var collectionName = builder.Configuration.GetSection("Database")["SearchSettings"] ?? "";
     return new SearchSettingsRepository(collectionName, connectionString, dbName);
 });
+builder.Services.AddScoped<ISearchSettingsService, SearchSettingsService>();
 
 builder.SetUpMicroService("SearchService");
 
