@@ -37,7 +37,7 @@ public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSett
         var result = await _searchSettingsRepository.GetByIdAsync(settingsId, userId);
         if (!result.IsSuccess)
         {
-            return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong", result.Code);
+            return Result<bool>.Failure(result.ErrorMessage ?? $"Could not find searchSetting with id: {settingsId}, belonging to user: {userId}", result.Code);
         }
         result.Data!.IsActive = true;
         
@@ -45,7 +45,8 @@ public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSett
         
         if (!updateResult.IsSuccess)
         {
-            return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong", result.Code);
+            return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong. No search has started for searchSetting with id:" +
+                $"{settingsId}, belonging to user: {userId}. Search did not start", result.Code);
         }
         
         return Result<bool>.Success(true);
@@ -54,6 +55,21 @@ public class SearchSettingsService(ISearchSettingsRepository repo) : ISearchSett
 
     public async Task<Result<bool>> StopSearchAsync(Guid settingsId, Guid userId)
     {
-        throw new NotImplementedException();
+        var result = await _searchSettingsRepository.GetByIdAsync(settingsId, userId);
+        if (!result.IsSuccess)
+        {
+            return Result<bool>.Failure(result.ErrorMessage ?? $"Could not find searchSetting with id: {settingsId}, belonging to user: {userId}", result.Code);
+        }
+        result.Data!.IsActive = false;
+        
+        var updateResult = await _searchSettingsRepository.UpdateAsync(result.Data, userId);
+        
+        if (!updateResult.IsSuccess)
+        {
+            return Result<bool>.Failure(result.ErrorMessage ?? "Something went wrong. No search has started for searchSetting with id:" +
+                $"{settingsId}, belonging to user: {userId}. Start did not stop.", result.Code);
+        }
+        
+        return Result<bool>.Success(true);
     }
 }
