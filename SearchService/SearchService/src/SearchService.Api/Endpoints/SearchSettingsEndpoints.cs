@@ -14,8 +14,8 @@ public static class SearchSettingsEndpoints
         group.MapPost("", PostAsync);
         group.MapPut("", UpdateAsync);
         group.MapDelete("", DeleteAsync);
-        // group.MapPut("/start/{settingsId}", StartSearchAsync);
-        // group.MapPut("/stop/{settingsId}", StopSearchAsync);
+        group.MapPut("/start/{settingsId}", StartSearchAsync);
+        group.MapPut("/stop/{settingsId}", StopSearchAsync);
 
         return group;
     }
@@ -69,6 +69,28 @@ public static class SearchSettingsEndpoints
     private static async Task<IResult> DeleteAsync(ISearchSettingsService service, Guid userId, Guid searchSettingsId)
     {
         var result = await service.DeleteAsync(searchSettingsId, userId);
+
+        if (!result.IsSuccess)
+        {
+            return result.Code == 404 ? Results.NotFound(result.ErrorMessage) : Results.BadRequest(result.ErrorMessage);
+        }
+
+        return Results.Ok(result.Data);
+    }
+    private static async Task<IResult> StartSearchAsync(ISearchSettingsService service, Guid userId, Guid searchSettingsId)
+    {
+        var result = await service.StartSearchAsync(searchSettingsId, userId);
+
+        if (!result.IsSuccess)
+        {
+            return result.Code == 404 ? Results.NotFound(result.ErrorMessage) : Results.BadRequest(result.ErrorMessage);
+        }
+
+        return Results.Ok(result.Data);
+    }
+    private static async Task<IResult> StopSearchAsync(ISearchSettingsService service, Guid userId, Guid searchSettingsId)
+    {
+        var result = await service.StopSearchAsync(searchSettingsId, userId);
 
         if (!result.IsSuccess)
         {
